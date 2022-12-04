@@ -11,4 +11,3 @@ export const deleteItem = payload =>
 
 export const changeItemIsDone = payload => 
   ({ type: ACTION_TYPES.TODO_CHANGE_ITEM_IS_DONE, payload : payload });
-

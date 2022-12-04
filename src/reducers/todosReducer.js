@@ -1,7 +1,7 @@
 import ACTION_TYPES from "../actions/actionTypes";
 
 const reducer = (state, action) => {
-  console.log(action.type);
+  //console.log(action.type);
   switch(action.type) {
     case ACTION_TYPES.TODO_CHANGE_ITEM_TITLE :
       return {
@@ -19,6 +19,7 @@ const reducer = (state, action) => {
             isDone : false,
           }
         ],
+        currentTitle: '',
       };
     case ACTION_TYPES.TODO_CHANGE_ITEM_IS_DONE :
       return {

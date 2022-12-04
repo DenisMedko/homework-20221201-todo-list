@@ -1,7 +1,9 @@
 import React from 'react';
 
 const TodoList = (props) => {
+
     const {handleIsDone, handleDelete} = props;
+
     const todoList = props.todos.map( elem => {
         const {id, title, isDone} = elem;
         return (<div key={id}>
@@ -10,6 +12,7 @@ const TodoList = (props) => {
                     <button name={id} onClick={handleDelete}>Delete</button>
                 </div>)}
     );
+
     return (
         <div>
             {todoList}    
