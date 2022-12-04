@@ -1,12 +1,14 @@
 import React from 'react';
 
 const TodoList = (props) => {
-    const todoList = props.todos.map( elem => 
-        <div key={elem.id}>
-            {elem.title}
-            <input type="checkbox" name={elem.id} checked={elem.isChecked} onChange={props.checkHandler}/>
-            <button name={elem.id} onClick={props.deleteHandler}>Delete</button>
-        </div>
+    const {handleIsDone, handleDelete} = props;
+    const todoList = props.todos.map( elem => {
+        const {id, title, isDone} = elem;
+        return (<div key={id}>
+                    {title}
+                    <input type="checkbox" name={id} checked={isDone} onChange={handleIsDone}/>
+                    <button name={id} onClick={handleDelete}>Delete</button>
+                </div>)}
     );
     return (
         <div>
