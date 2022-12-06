@@ -15,7 +15,7 @@ const TodoList = (props) => {
                         onChange={handleIsDone}
                         className={styles.checkBox}
                     />
-                    <button name={id} onClick={handleDelete} className={styles.deleteBtn}>X</button>
+                    <button type="button" name={id} onClick={handleDelete} className={styles.deleteBtn}>X</button>
                 </div>)}
     );
 
