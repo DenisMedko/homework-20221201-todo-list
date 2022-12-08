@@ -1,13 +1,7 @@
 import ACTION_TYPES from "../actions/actionTypes";
 
 const reducer = (state, action) => {
-  //console.log(action.type, action.payload);
   switch(action.type) {
-    // case ACTION_TYPES.TODO_CHANGE_ITEM_TITLE :
-    //   return {
-    //     ...state,
-    //     //currentTitle : action.payload,  
-    //   };
     case ACTION_TYPES.TODO_ADD_ITEM :
       return {
         ...state,
@@ -19,15 +13,14 @@ const reducer = (state, action) => {
             isDone : false,
           }
         ],
-        //currentTitle: '',
       };
     case ACTION_TYPES.TODO_CHANGE_ITEM_IS_DONE :
       return {
         ...state,
-        todos : state.todos.map(item => (
-          { ...item, 
-            isDone : item.id === action.payload.id ? 
-              action.payload.value : item.isDone,   
+        todos : state.todos.map(todo => (
+          { ...todo, 
+            isDone : todo.id === action.payload ? 
+              !todo.isDone : todo.isDone,   
           })
         ),  
       };

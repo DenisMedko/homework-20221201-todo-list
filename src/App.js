@@ -4,8 +4,7 @@ import styles from './App.module.scss';
 import TodoList from './components/TodoList';
 import todosReducer from './reducers/todosReducer';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { addItem, changeItemIsDone, deleteItem } from './actions/actionCreators';
-
+import { addItem } from './actions/actionCreators';
 
 const initialState = {
   todos : [],
@@ -25,35 +24,22 @@ const App = () => {
 
   const [state, dispatch] = useReducer(todosReducer, initialState);
 
-  const handleAddBtn = (e) => {
-    dispatch( addItem(e.title) );
-    e.title = '';
-  };
-
-  const handleIsDone = ({target : {name : id, checked}}) => {
-    dispatch( changeItemIsDone({id : +id, value : checked}));
-  };
-
-  const handleDelete = ({target : {name : id}}) => {
-    dispatch( deleteItem(+id) );
+  const handleAddBtn = (values, formikBag) => {
+    dispatch( addItem(values.title) );
+    formikBag.resetForm();
   };
 
   const {todos} = state; 
   
   return (
-    
+  
     <div className={styles.todoList}>
       <Formik 
         initialValues={initialFormState} 
         onSubmit={handleAddBtn}
         validationSchema={TODO_ITEM_SCHEMA}
         >
-          { (formikProps) => {
-            // console.log('isSubmitting '+formikProps.isSubmitting,
-            //   'isValid '+ formikProps.isValid,
-            //   'isValidating '+formikProps.isValidating
-            //  );
-            return (
+          { (formikProps) => { return (
               <Form className={styles.form}>
                 {!formikProps.isSubmitting && 
                 !formikProps.isValid  && 
@@ -62,14 +48,11 @@ const App = () => {
                   type="text" 
                   name="title"
                   placeholder="To do title"
-                  className={styles.todoInput} 
-                  //value={currentTitle} 
-                  //onChange={handleInput}
-                />
+                  className={styles.todoInput} />
                 <button type="submit" className={styles.todoAddBtn}>Add</button>   
               </Form>)} }
       </Formik> 
-      <TodoList todos={todos} handleIsDone={handleIsDone} handleDelete={handleDelete}/>             
+      <TodoList todos={todos} dispatch={dispatch}/>             
     </div>
   );
 
